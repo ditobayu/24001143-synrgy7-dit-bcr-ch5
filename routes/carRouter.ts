@@ -9,6 +9,7 @@ import {
   getCarOrderById,
 } from "../services/carServices";
 import { authenticate } from "../middleware/auth";
+import upload from "../middleware/uploadHandler";
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.use(authenticate);
 
 router.get("/", getCars);
 router.get("/:id", getCarById);
-router.post("/", createCar);
+router.post("/", upload.single("image"), createCar);
 router.put("/:id", updateCar);
 router.delete("/:id", deleteCar);
 router.get("/:id/orders", getCarOrders);

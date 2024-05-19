@@ -4,6 +4,8 @@ import { Model } from "objection";
 import Router from "./routes/index";
 import cookieParser from "cookie-parser";
 import { createClient } from "redis";
+import multer, { FileFilterCallback } from "multer";
+import path from "path";
 
 const app: Express = express();
 const port = 3000;
@@ -38,6 +40,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/public", express.static(path.join(__dirname, "./public")));
+
+app.use("/uploads", express.static(path.join(__dirname, "./public/uploads")));
 app.use(Router);
 
 app.listen(port, () => {

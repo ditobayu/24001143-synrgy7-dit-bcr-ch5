@@ -31,9 +31,24 @@ const getCarsByCategory = async (req: Request, res: Response) => {
 
 const createCar = async (req: Request, res: Response) => {
   try {
-    const car = await CarsModel.query().insert(req.body);
+    const { body, file } = req;
+
+    if (!file) {
+      return res.status(400).json({ message: "Image is required" });
+    }
+
+    const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${
+      file.filename
+    }`;
+    const carData = {
+      ...body,
+      image: fileUrl, // Simpan path gambar
+    };
+
+    const car = await CarsModel.query().insert(carData);
     res.json(car);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "" });
   }
 };
