@@ -6,7 +6,7 @@ const getCars = async (req: Request, res: Response) => {
     const cars = await CarsModel.query();
     res.json(cars);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -15,7 +15,7 @@ const getCarById = async (req: Request, res: Response) => {
     const car = await CarsModel.query().findById(req.params.id);
     res.json(car);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -25,7 +25,7 @@ const getCarsByCategory = async (req: Request, res: Response) => {
     const cars = await CarsModel.query().where("category", req.params.category);
     res.json(cars);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -49,7 +49,7 @@ const createCar = async (req: Request, res: Response) => {
     res.json(car);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -63,7 +63,7 @@ const updateCar = async (req: Request, res: Response) => {
       res.status(404).json({ message: "Car not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -77,7 +77,7 @@ const deleteCar = async (req: Request, res: Response) => {
       res.status(404).json({ message: "Car not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -88,7 +88,7 @@ const getCarOrders = async (req: Request, res: Response) => {
       .withGraphFetched("orders");
     res.json(car);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -102,7 +102,7 @@ const getCarOrderById = async (req: Request, res: Response) => {
       });
     res.json(car);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 

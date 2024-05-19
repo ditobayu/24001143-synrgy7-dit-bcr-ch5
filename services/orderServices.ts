@@ -6,7 +6,7 @@ const getOrders = async (req: Request, res: Response) => {
     const orders = await OrdersModel.query();
     res.json(orders);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -15,7 +15,7 @@ const getOrderById = async (req: Request, res: Response) => {
     const order = await OrdersModel.query().findById(req.params.id);
     res.json(order);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -24,7 +24,7 @@ const createOrder = async (req: Request, res: Response) => {
     const order = await OrdersModel.query().insert(req.body);
     res.json(order);
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -38,7 +38,7 @@ const updateOrder = async (req: Request, res: Response) => {
       res.status(404).json({ message: "Order not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -52,7 +52,7 @@ const deleteOrder = async (req: Request, res: Response) => {
       res.status(404).json({ message: "Order not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: "" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
