@@ -1,3 +1,7 @@
+## ERD
+
+https://whimsical.com/erd-EEA22qsnnxiqEDUA6aLBvD
+
 ## Installation
 
 - Clone this project
