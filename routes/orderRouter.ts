@@ -6,8 +6,11 @@ import {
   updateOrder,
   deleteOrder,
 } from "../services/orderServices";
+import { authenticate } from "../middleware/auth";
 
 const router = express.Router();
+
+router.use(authenticate);
 
 router.get("/", getOrders);
 router.get("/:id", getOrderById);

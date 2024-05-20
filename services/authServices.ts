@@ -13,7 +13,7 @@ const register = async (req: Request, res: Response) => {
       res.status(400).json({ message: "Email already registered" });
     } else {
       const newUser = await UsersModel.query().insert(req.body);
-      await client.setEx(token, 600, "valid");
+      await client.setEx(token, 24 * 60 * 1000, "valid");
       res.json({ ...newUser, token });
     }
   } catch (error) {
@@ -27,11 +27,11 @@ const login = async (req: Request, res: Response) => {
     const user = await UsersModel.query().findOne({ email: req.body.email });
     const token = generateToken();
     if (user && user.password === req.body.password) {
-      await client.setEx(token, 600, "valid");
+      await client.setEx(token, 24 * 60 * 1000, "valid");
       // set cookie token
       res
         .cookie("token", token, {
-          maxAge: 60000 * 1000,
+          maxAge: 24 * 60 * 1000,
           httpOnly: true,
         })
         .json({ message: "Login successful", token: token });

@@ -10,6 +10,7 @@ import {
 } from "../services/carServices";
 import { authenticate } from "../middleware/auth";
 import upload from "../middleware/uploadHandler";
+import { get } from "http";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.use(authenticate);
 router.get("/", getCars);
 router.get("/:id", getCarById);
 router.post("/", upload.single("image"), createCar);
-router.put("/:id", updateCar);
+router.put("/:id", upload.single("image"), updateCar);
 router.delete("/:id", deleteCar);
 router.get("/:id/orders", getCarOrders);
 router.get("/:id/orders/:orderId", getCarOrderById);

@@ -4,9 +4,17 @@ export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable("orders", (table) => {
     table.increments("id").primary();
     table.integer("user_id").unsigned().notNullable();
-    table.foreign("user_id").references("id").inTable("users");
+    table
+      .foreign("user_id")
+      .references("id")
+      .inTable("users")
+      .onDelete("CASCADE");
     table.integer("car_id").unsigned().notNullable();
-    table.foreign("car_id").references("id").inTable("cars");
+    table
+      .foreign("car_id")
+      .references("id")
+      .inTable("cars")
+      .onDelete("CASCADE");
     table.integer("price").notNullable();
     table.string("status").notNullable();
     table.dateTime("start_rent").notNullable();
